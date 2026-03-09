@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMG Hospital & Institute of Panchakarma | सरकाघाट का सर्वश्रेष्ठ पंचकर्म केंद्र</title>
+    <style>
+        :root {
+            --primary-green: #2d5a27;
+            --earth-brown: #c05d2e;
+            --soft-cream: #f9f7f2;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--soft-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0; z-index: 1000;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-green); display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 45px; width: 45px; border-radius: 50%; object-fit: cover; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; margin-left: 20px; transition: 0.3s; }
+        nav a:hover { color: var(--earth-brown); }
+
+        .hero {
+            background: url('images/vmg-background.png') center center / cover no-repeat;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 71, 42, 0.8);
+            pointer-events: none;
+        }
+        .hero > * { position: relative; z-index: 1; }
+
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; max-width: 700px; }
+
+        .btn {
+            background: var(--earth-brown);
+            color: white; padding: 15px 30px; border: none; border-radius: 5px;
+            font-size: 1.1rem; cursor: pointer; text-decoration: none; display: inline-block;
+            margin-top: 20px; transition: 0.3s;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+        .section-title { text-align: center; margin-bottom: 3rem; color: var(--primary-green); }
+
+        .services { padding: 4rem 10%; text-align: center; background: white; }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; margin-top: 2rem;
+        }
+        .service-card {
+            padding: 2rem; border-radius: 10px; background: var(--soft-cream);
+            border-bottom: 4px solid var(--primary-green); transition: 0.3s;
+        }
+        .service-card:hover { transform: scale(1.05); }
+
+        .doctor-section { padding: 4rem 10%; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .doctor-img { flex: 1; min-width: 300px; }
+        .doctor-img img { width: 100%; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .doctor-info { flex: 2; min-width: 300px; }
+
+        /* CHATBOT */
+        #chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 2000; }
+        .chat-button {
+            background: #25d366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        #chat-box {
+            display: none; width: 320px; height: 450px; background: white;
+            border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: absolute; bottom: 80px; right: 0; flex-direction: column; overflow: hidden;
+        }
+        .chat-header { background: var(--primary-green); color: white; padding: 15px; display: flex; justify-content: space-between; }
+        .chat-body { padding: 15px; flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
+        .bot-msg { background: #e8f5e9; padding: 10px; border-radius: 10px; align-self: flex-start; }
+        .user-msg { background: var(--earth-brown); color: white; padding: 10px; border-radius: 10px; align-self: flex-end; }
+        .chat-footer { padding: 10px; background: #f0f0f0; display: flex; gap: 5px; flex-wrap: wrap; }
+        .chat-footer button { flex: 1; padding: 8px; cursor: pointer; border: 1px solid #ccc; background: white; border-radius: 5px; font-size: 0.8rem; }
+
+        footer { background: var(--primary-green); color: white; text-align: center; padding: 2rem; }
+
+        /* New course section styles */
+        .course-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #3b6e35 100%);
+            color: white;
+            padding: 3rem 10%;
+            text-align: center;
+            border-radius: 0;
+            margin: 2rem 0;
+        }
+        .course-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffd966;
+        }
+        .course-section h3 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ffd966;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        .course-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .course-feature {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .course-contact {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .course-contact a {
+            color: #ffd966;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .course-contact a:hover {
+            text-decoration: underline;
+        }
+        .small-note {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><img src="images/vmg-logo.png" alt="VMG Logo"> VMG Hospital & Institute of Panchakarma</div>
+        <nav>
+            <a href="#services">उपचार</a>
+            <a href="#course">कोर्स</a>
+            <a href="#doctor">डॉक्टर</a>
+            <a href="#contact-info">संपर्क</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>🌿 Ancient Purity. Modern Medicine. </h1>
+        <p>VMG "Welcome to VMG Ayurveda Hospital & Panchakarma Centre (Sarkaghat), where we embrace the power of nature to heal. We specialise in treating the root cause of your health concerns through authentic, time-tested Ayurvedic therapies."
+</p>
+        <a href="javascript:void(0)" class="btn" onclick="toggleChat()">अपॉइंटमेंट बुक करें</a>
+    </section>
+
+   <!-- Price List / Panchakarma Services with Fees -->
+    <section id="prices" class="services" style="background: var(--soft-cream);">
+        <h2 class="section-title">पंचकर्म चिकित्सा एवं शुल्क (Price List)</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>बस्ती चिकित्सा</h3>
+                <p>वात एवं जोड़ों के दर्द के लिए</p>
+                <p><strong>शुल्क:</strong> ₹500 - ₹1200*</p>
+            </div>
+            <div class="service-card">
+                <h3>शिरोधारा</h3>
+                <p>तनाव और अनिद्रा के लिए</p>
+                <p><strong>शुल्क:</strong> ₹800 - ₹1500*</p>
+            </div>
+            <div class="service-card">
+                <h3>नस्य / कपिंग</h3>
+                <p>साइनस और त्वचा रोगों के लिए</p>
+                <p><strong>शुल्क:</strong> ₹300 - ₹700*</p>
+            </div>
+        </div>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">*शुल्क उपचार की अवधि और प्रयुक्त औषधियों के आधार पर भिन्न हो सकते हैं।</p>
+    </section>
+
+    <!-- New Panchakarma Technician Course Section (from image) -->
+    <section id="course" class="course-section">
+        <h2>📜 पंचकर्म तकनीशियन कोर्स</h2>
+        <h3>COURSE: PANCHAKARMA TECHNICIAN</h3>
+        <p style="font-size: 1.2rem;">🇮🇳 AFFILIATED TO NSDC DELHI | APPROVED BY GOVT. OF INDIA</p>
+        
+        <div class="course-details">
+            <span class="course-feature">📚 REGULAR CLASSES</span>
+            <span class="course-feature">💯 100% JOB PLACEMENT</span>
+            <span class="course-feature">🎯 Limited SEATS ONLY</span>
+            <span class="course-feature">👥 BOTH BOYS & GIRLS</span>
+        </div>
+
+        <p style="font-size: 1.1rem; max-width: 700px; margin: 2rem auto;">
+            <strong>BASED ON PRINCIPLES OF CPCK(Community-Oriented Primary Care))</strong><br>
+            <span>(Under guidance of Dr. Shivdeepanand Sharma)</span>
+        </p>
+
+        <div class="course-contact">
+            📞 संपर्क करें: 
+            <a href="tel:+91888943252590">888943-52590</a> | 
+            <a href="tel:+911905230231">01905-230231</a>
+        </div>
+        <p class="small-note">HOSPITAL & INSTITUTE OF PANCHKARM, सरकाघाट (मंडी) H.P.</p>
+    </section>
+
+    <!-- Doctor Section with actual photo -->
+    <section id="doctor" class="doctor-section">
+        <div class="doctor-img">
+            <img src="images/dr-shiv.jpg" alt="Dr. Shivdeep Anand Sharma - BAMS, Panchakarma Specialist">
+        </div>
+        <div class="doctor-info">
+            <h2 style="color: var(--primary-green);">डॉ. शिवदीप आनंद शर्मा (BAMS)</h2>
+            <p><strong>अनुभव:</strong> 9+ वर्ष | <strong>विशेषज्ञ:</strong>पंचकर्म और गुदा रोग विशेषज्ञ  </p>
+            <p>डॉ. शर्मा सरकाघाट क्षेत्र में अपने मरीजों के प्रति समर्पण और सटीक आयुर्वेदिक निदान के लिए जाने जाते हैं।</p>
+            <a href="tel:+917807525590" class="btn" style="background: var(--primary-green);">कॉल करें: +91 78075-25590</a>
+        </div>
+    </section>
+
+    <!-- Patient Reviews Section -->
+    <section id="reviews" style="padding: 4rem 10%; background-color: var(--soft-cream); text-align: center;">
+        <h2 class="section-title">हमारे संतुष्ट मरीज़ (5★ रेटिंग)</h2>
+        <p style="margin-bottom: 30px; color: #555;">
+            <a href="https://www.justdial.com" target="_blank" rel="noopener" style="color: var(--earth-brown);">Justdial</a> पर आधारित वास्तविक अनुभव
+        </p>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <!-- Review 1 -->
+            <div style="background: white; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid gold;">
+                <div style="color: gold; font-size: 1.2rem; margin-bottom: 10px;">★★★★★</div>
+                <p style="font-style: italic; color: #333;">"सरकाघाट में सबसे अच्छा आयुर्वेद अस्पताल। स्टाफ बहुत ही मिलनसार है और डॉक्टर साहब का व्यवहार बहुत अच्छा है।"</p>
+                <h4 style="margin-top: 15px; color: var(--primary-green);">- एक संतुष्ट मरीज़</h4>
+            </div>
+            <!-- Review 2 -->
+            <div style="background: white; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid gold;">
+                <div style="color: gold; font-size: 1.2rem; margin-bottom: 10px;">★★★★★</div>
+                <p style="font-style: italic; color: #333;">"पुरानी बीमारियों के लिए पंचकर्म चिकित्सा यहाँ बहुत प्रभावी है। साफ़-सफाई और इलाज का स्तर बहुत ऊँचा है।"</p>
+                <h4 style="margin-top: 15px; color: var(--primary-green);">- स्थानीय निवासी</h4>
+            </div>
+            <!-- Review 3 -->
+            <div style="background: white; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid gold;">
+                <div style="color: gold; font-size: 1.2rem; margin-bottom: 10px;">★★★★★</div>
+                <p style="font-style: italic; color: #333;">"उत्कृष्ट उपचार और सही परामर्श। सरकाघाट में आयुर्वेद के लिए इससे बेहतर जगह कोई नहीं है।"</p>
+                <h4 style="margin-top: 15px; color: var(--primary-green);">- राहुल कुमार</h4>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <a href="https://www.justdial.com" target="_blank" rel="noopener" style="color: var(--earth-brown); text-decoration: none; font-weight: bold;">
+                सभी रिव्यू Justdial पर देखें →
+            </a>
+        </div>
+    </section>
+
+    
+
+    <!-- Appointment Booking Form -->
+    <section id="appointment" style="padding: 4rem 10%; background-color: #fff;">
+        <div style="max-width: 600px; margin: 0 auto; background: var(--soft-cream); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; color: var(--primary-green);">ऑनलाइन अपॉइंटमेंट बुक करें</h2>
+            <form id="bookingForm" onsubmit="sendToWhatsApp(event)">
+                <label>मरीज का नाम:</label><br>
+                <input type="text" id="pName" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;"><br>
+                
+                <label>बीमारी / उपचार का प्रकार:</label><br>
+                <select id="pService" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                    <option value="General Consultation">सामान्य परामर्श</option>
+                    <option value="Panchakarma">पंचकर्म चिकित्सा</option>
+                    <option value="Joint Pain">जोड़ों का दर्द</option>
+                    <option value="Skin Issues">त्वचा रोग</option>
+                    <option value="Other Issues">अन्य समस्याएं</option>
+                </select><br>
+
+                <label>पसंदीदा तारीख:</label><br>
+                <input type="date" id="pDate" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;"><br>
+
+                <button type="submit" class="btn" style="width: 100%; background: var(--primary-green);">WhatsApp पर बुकिंग भेजें</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact-info">
+        <p>&copy; 2024 VMG आयुर्वेद अस्पताल,सरकाघाट, जिला मंडी (H.P.)</p>
+        <p>समय: सुबह 9:00 - शाम 6:00 (रोजाना) | फोन: <a href="tel:+917807525590" style="color: white; text-decoration: underline;">+91 78075-25590</a> | <a href="tel:+91888943252590" style="color: white; text-decoration: underline;">888943-52590</a></p>
+    </footer>
+
+    <!-- CHATBOT Widget -->
+    <div id="chat-widget">
+        <div id="chat-box">
+            <div class="chat-header">
+                <span>VMG डिजिटल सहायक</span>
+                <span style="cursor:pointer" onclick="toggleChat()">✖</span>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="bot-msg">नमस्ते! VMG अस्पताल में आपका स्वागत है। मैं आपकी कैसे मदद कर सकता हूँ?</div>
+            </div>
+            <div class="chat-footer">
+                <button onclick="botChat('book')">📅 अपॉइंटमेंट</button>
+                <button onclick="botChat('map')">📍 लोकेशन</button>
+                <button onclick="botChat('call')">📞 कॉल</button>
+            </div>
+        </div>
+        <div class="chat-button" onclick="toggleChat()">💬</div>
+    </div>
+
+    <script>
+        // Toggle chat box visibility
+        function toggleChat() {
+            const box = document.getElementById('chat-box');
+            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Chatbot responses
+        function botChat(action) {
+            const body = document.getElementById('chatBody');
+            let uMsg = "";
+            let bMsg = "";
+
+            if(action === 'book') {
+                uMsg = "अपॉइंटमेंट चाहिए";
+                bMsg = "आप +91 78075 25590 पर WhatsApp मैसेज भेजकर समय ले सकते हैं।";
+            } else if(action === 'map') {
+                uMsg = "लोकेशन कहाँ है?";
+                bMsg = 'हम सरकाघाट (मंडी) में स्थित हैं। <a href="https://maps.google.com/?q=Sarkaghat+Mandi+HP" target="_blank" style="color: var(--earth-brown);">यहाँ क्लिक करें</a>';
+            } else if(action === 'call') {
+                uMsg = "डॉक्टर से बात करनी है";
+                bMsg = "आप अभी +91 78075 25590 पर डायल कर सकते हैं।";
+            }
+
+            body.innerHTML += `<div class="user-msg">${uMsg}</div>`;
+            setTimeout(() => {
+                body.innerHTML += `<div class="bot-msg">${bMsg}</div>`;
+                body.scrollTop = body.scrollHeight;
+            }, 500);
+        }
+
+        // WhatsApp booking form submission
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            const name = document.getElementById('pName').value;
+            const service = document.getElementById('pService').value;
+            const date = document.getElementById('pDate').value;
+            
+            const message = `नमस्ते VMG अस्पताल, मैं एक अपॉइंटमेंट बुक करना चाहता हूँ:%0A%0Aनाम: ${encodeURIComponent(name)}%0Aउपचार: ${encodeURIComponent(service)}%0Aतारीख: ${encodeURIComponent(date)}`;
+            window.open(`https://wa.me/917807525590?text=${message}`, '_blank');
+        }
+    </script>
+
+</body>
+</html>
