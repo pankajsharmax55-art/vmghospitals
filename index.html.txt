@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMG Hospital & Institute of Panchakarma | सरकाघाट का सर्वश्रेष्ठ पंचकर्म केंद्र</title>
+    <style>
+        :root {
+            --primary-green: #2d5a27;
+            --earth-brown: #c05d2e;
+            --soft-cream: #f9f7f2;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--soft-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: white;
+            ... (content truncated for brevity) ...
+        }
+    </style>
+</head>
+<body>
+
+<!-- Additional content goes here -->
+
+<script>
+    // Your JavaScript here if needed
+</script>
+
+</body>
+</html>
